@@ -1,6 +1,10 @@
 package be.vdab.servlets;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletException;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import be.vdab.dao.PizzaDAO;
+import be.vdab.entities.Pizza;
 
 /**
  * Servlet implementation class PizzaServlet
@@ -28,9 +33,18 @@ public class PizzaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		((AtomicInteger) this.getServletContext().getAttribute(PIZZAS_REQUESTS))
-		.incrementAndGet();
-		request.setAttribute("pizzas", pizzaDAO.findAll());
+		((AtomicInteger) this.getServletContext().getAttribute(PIZZAS_REQUESTS)).incrementAndGet();
+		List<Pizza> pizzas = pizzaDAO.findAll();
+		String pizzaFotosPad = this.getServletContext().getRealPath("/pizzafotos");
+		Set<Long> pizzaIdsMetFoto = new HashSet<>();
+		for (Pizza pizza : pizzas) {
+			File file = new File(String.format("%s/%d.jpg", pizzaFotosPad, pizza.getId()));
+			if (file.exists()) { // is er foto voor deze pizza ?
+				pizzaIdsMetFoto.add(pizza.getId());
+			}
+		}
+		request.setAttribute("pizzas", pizzas);
+		request.setAttribute("pizzaIdsMetFoto", pizzaIdsMetFoto);
 		request.getRequestDispatcher(VIEW).forward(request, response);
 
 	}
