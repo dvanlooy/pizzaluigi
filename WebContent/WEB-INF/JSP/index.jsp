@@ -12,7 +12,7 @@
 <c:import url='/WEB-INF/JSP/menu.jsp'/>
 	<h1>Pizza Luigi</h1>
 	<img src=<c:url value='/images/pizza.jpg'/> alt='pizza' class='fullwidth'>
-	<h2>${begroeting}</h2>
+	<h2>${begroeting} ${cookie.naam.value}</h2>
 	<h2>De zaakvoerder</h2>
 	<dl>
 		<dt>Naam</dt>
