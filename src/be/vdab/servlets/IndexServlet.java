@@ -13,10 +13,8 @@ import be.vdab.entities.Adres;
 import be.vdab.entities.Begroeting;
 import be.vdab.entities.Persoon;
 
-/**
- * Servlet implementation class IndexServlet
- */
-@WebServlet(urlPatterns = "/index.htm", name = "indexservlet")
+
+@WebServlet("/index.htm")
 public class IndexServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String INDEX_REQUESTS = "indexRequests";
