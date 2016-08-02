@@ -6,6 +6,18 @@
 <c:import url='/WEB-INF/JSP/head.jsp'>
 	<c:param name='title' value='Bestellen' />
 </c:import>
+<script>
+	document.getElementById('toevoegform').onsubmit = function() {
+		if (!navigator.cookieEnabled) {
+			(1)
+			alert("Dit werkt enkel als cookies aanstaan");
+			(2)
+			return false;
+			(3)
+		}
+		document.getElementById('toevoegknop').disabled = true;
+	};
+</script>
 </head>
 <body>
 	<c:import url='/WEB-INF/JSP/menu.jsp' />
