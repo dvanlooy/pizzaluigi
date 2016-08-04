@@ -1,4 +1,4 @@
-<%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
+<%@page contentType='text/html' pageEncoding='UTF-8'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <!doctype html>
 <html lang='nl'>
@@ -9,11 +9,11 @@
 <script>
 	document.getElementById('toevoegform').onsubmit = function() {
 		if (!navigator.cookieEnabled) {
-			(1)
+
 			alert("Dit werkt enkel als cookies aanstaan");
-			(2)
+
 			return false;
-			(3)
+
 		}
 		document.getElementById('toevoegknop').disabled = true;
 	};
