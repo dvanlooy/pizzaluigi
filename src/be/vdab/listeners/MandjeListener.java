@@ -8,10 +8,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
-/**
- * Application Lifecycle Listener implementation class MandjeListener
- *
- */
+
 @WebListener
 public class MandjeListener implements ServletContextListener, HttpSessionAttributeListener {
 	private static final String MANDJE = "mandje";
