@@ -5,11 +5,13 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import be.vdab.dao.PizzaDAO;
 
@@ -20,7 +22,12 @@ import be.vdab.dao.PizzaDAO;
 public class PizzasTussenPrijzenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String VIEW = "/WEB-INF/JSP/pizzastussenprijzen.jsp";
-	private final PizzaDAO pizzaDAO = new PizzaDAO();
+	private final transient PizzaDAO pizzaDAO = new PizzaDAO();
+
+	@Resource(name = PizzaDAO.JNDI_NAME)
+	void setDataSource(DataSource dataSource) {
+		pizzaDAO.setDataSource(dataSource);
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
