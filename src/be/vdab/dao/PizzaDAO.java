@@ -8,15 +8,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import be.vdab.entities.Pizza;
 
 public class PizzaDAO extends AbstractDAO {
 	private static final String BEGIN_SELECT = "select id, naam, prijs, pikant from pizzas ";
-	private static final String FIND_ALL_SQL = BEGIN_SELECT + "order by naam";
+	private static final String FIND_ALL_SQL = BEGIN_SELECT + "order by prijs";
 	private static final String READ_SQL = BEGIN_SELECT + "where id=?";
 	private static final String FIND_BY_PRIJS_BETWEEN_SQL = BEGIN_SELECT + "where prijs between ? and ? order by prijs";
 	private static final String CREATE_SQL = "insert into pizzas(naam, prijs, pikant) values (?, ?, ?)";
+	private final static Logger logger = Logger.getLogger(PizzaDAO.class.getName());
 
 	public List<Pizza> findAll() {
 		try (Connection connection = dataSource.getConnection();
@@ -28,6 +31,7 @@ public class PizzaDAO extends AbstractDAO {
 			}
 			return pizzas;
 		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database pizzaluigi", ex);
 			throw new DAOException(ex);
 		}
 	}
@@ -49,6 +53,7 @@ public class PizzaDAO extends AbstractDAO {
 				return null;
 			}
 		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database pizzaluigi", ex);
 			throw new DAOException(ex);
 		}
 	}
@@ -66,6 +71,7 @@ public class PizzaDAO extends AbstractDAO {
 				return pizzas;
 			}
 		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database pizzaluigi", ex);
 			throw new DAOException(ex);
 		}
 	}
@@ -83,6 +89,7 @@ public class PizzaDAO extends AbstractDAO {
 				pizza.setId(resultSet.getLong(1));
 			}
 		} catch (SQLException ex) {
+			logger.log(Level.SEVERE, "Probleem met database pizzaluigi", ex);
 			throw new DAOException(ex);
 		}
 	}

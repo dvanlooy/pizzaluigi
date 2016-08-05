@@ -1,6 +1,7 @@
 package be.vdab.servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.servlet.ServletException;
@@ -30,6 +31,8 @@ public class IndexServlet extends HttpServlet {
 			throws ServletException, IOException {
 		((AtomicInteger) this.getServletContext().getAttribute(INDEX_REQUESTS))
 		.incrementAndGet();
+		request.setAttribute("nu", Calendar.getInstance().getTime());
+		request.setAttribute("aantalPizzasVerkocht", 23000);
 		request.setAttribute("zaakvoerder",
 				new Persoon("Luigi", "Peperone", 7, true, new Adres("Grote markt", "3", 9700, "Oudenaarde")));
 		request.setAttribute("begroeting", new Begroeting());
