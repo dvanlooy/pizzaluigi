@@ -11,7 +11,7 @@
 </c:import>
 </head>
 <body>
-	<vdab:menu/>
+	
 	<h1>Pizza Luigi</h1>
 	<img src=<c:url value='/images/pizza.jpg'/> alt='pizza'
 		class='fullwidth'>
